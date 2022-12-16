@@ -1,3 +1,5 @@
+Alunos: Pedro Mandelli e Theo Rivero
+
 O projeto de solução do problema deste código é criar uma classe ListaInvertida que permita 
 a inserção de linhas de dados com informações divididas em três categorias: nome, idade e time. 
 A classe deve ser capaz de armazenar os dados inseridos em uma estrutura de dados que permita fácil busca de informações, 
