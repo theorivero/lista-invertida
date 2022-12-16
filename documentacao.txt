@@ -1,13 +1,56 @@
+O projeto de solução do problema deste código é criar uma classe ListaInvertida que permita 
+a inserção de linhas de dados com informações divididas em três categorias: nome, idade e time. 
+A classe deve ser capaz de armazenar os dados inseridos em uma estrutura de dados que permita fácil busca de informações, 
+utilizando uma estrutura de listas invertidas.
+
+As decisões de projeto tomadas para a implementação desta classe incluem:
+
+Escolhemos usar listas invertidas porque elas permitem realizar buscas eficientes por valores específicos em um conjunto de dados, 
+bem como buscas combinadas por valores de múltiplas categorias.
+
+Dividimos os dados em três diretórios (nome, idade e time) para permitir a busca por valores específicos em cada categoria individualmente,
+bem como a busca combinada por valores de múltiplas categorias.
+
+Adotamos a modularização de dividir o código em métodos separados para cada tarefa principal: inserção de dados, 
+construção da lista invertida e montagem de um dicionário com todos os valores de cada diretório. 
+Isso facilita a manutenção e a compreensão do código.
+
 Classe ListaInvertida:
 
-__init__(self): método construtor que inicializa os atributos data, lista_invertida e diretorios. O atributo data é uma lista vazia, lista_invertida é um dicionário vazio e diretorios é uma lista com os valores 'nome', 'idade' e 'time'.
+__init__(self): método construtor que inicializa os atributos data, lista_invertida e diretorios. 
+O atributo data é uma lista vazia, lista_invertida é um dicionário vazio e diretorios é uma lista com os valores 'nome', 'idade' e 'time'.
 
 insersao(self, valores): método que adiciona o dicionário valores na lista data e chama o método monta_lista_invertida().
 
-monta_lista_invertida(self): método que percorre os valores de diretorios e cria chaves no dicionário lista_invertida para cada valor. Em seguida, percorre novamente diretorios para criar as chaves no dicionário lista_invertida para combinações de valores distintos. Por exemplo, se diretorios for ['nome', 'idade', 'time'], serão criadas as chaves 'nome_idade', 'nome_time' e 'idade_time'. Depois, o método percorre cada linha em data e cria ou atualiza as chaves em lista_invertida com o índice da linha em data.
+monta_lista_invertida(self): método que percorre os valores de diretorios e cria chaves no dicionário lista_invertida para cada valor. 
+Em seguida, percorre novamente diretorios para criar as chaves no dicionário lista_invertida para combinações de valores distintos. 
+Por exemplo, se diretorios for ['nome', 'idade', 'time'], serão criadas as chaves 'nome_idade', 'nome_time' e 'idade_time'. 
+Depois, o método percorre cada linha em data e cria ou atualiza as chaves em lista_invertida com o índice da linha em data.
 
 ordena_duas_listas_pelo_primeiro_item_da_lista(lista1, lista2): método estático que recebe duas listas e as ordena pelo primeiro item de cada uma.
 
-montar_dict_com_todos_os_valor_de_cada_diretorio(self): método que cria um dicionário com chaves para cada valor em diretorios e valores vazios. Em seguida, percorre cada linha em data e adiciona os valores de cada chave no dicionário criado.
+montar_dict_com_todos_os_valor_de_cada_diretorio(self): método que cria um dicionário com chaves para cada valor em diretorios e valores vazios. 
+Em seguida, percorre cada linha em data e adiciona os valores de cada chave no dicionário criado.
 
-insersao_com_perguntas(self): método que solicita ao usuário que digite os valores para cada chave em diretorios e cria um dicionário com esses valores. Depois, chama o método insersao() passando o dicionário criado como argumento.
+insersao_com_perguntas(self): método que solicita ao usuário que digite os valores para cada chave em diretorios e cria um dicionário com esses valores. 
+Depois, chama o método insersao() passando o dicionário criado como argumento.
+
+escolha_inexistente(): método estático que exibe a mensagem 'opção inexistente' e chama o método 'menu'.
+
+carga_de_dados(self): método que carrega dados para utilização de funções dentro da classe
+
+busca_simples(self): realiza uma busca na lista invertida de acordo com um valor especificado em um dicionário filtro e retorna uma lista de índices de 
+linhas que possuem esse valor em algum de seus campos. Se o valor especificado não existir como chave na lista invertida, a função retorna uma lista vazia.
+
+busca_complexa(self): realiza uma busca na lista invertida de acordo com múltiplos valores especificados em um dicionário filtros. Ela retorna uma lista de índices de linhas que 
+atendem a todos os filtros especificados em filtros. A função percorre cada chave e valor em filtros e verifica se os índices retornados pelo método busca_simples
+para cada chave estão contidos na lista de índices retornada pelo método busca_simples para a chave anterior. 
+Se todos os índices estiverem contidos, ela retorna a lista de índices; caso contrário, ela retorna uma lista vazia.
+
+mostrar_todos_elementos(self): retorna uma lista de dicionários contendo todos os elementos armazenados na lista data.
+
+remover_elemento_por_index(self): remove um elemento da lista data com base em um índice especificado como argumento. Ela usa o método pop da lista para remover o elemento na posição especificada e, em seguida, 
+chama o método monta_lista_invertida para atualizar a lista invertida.
+
+menu(self): exibe uma lista de opções para o usuário escolher e realiza a ação correspondente de acordo com a opção selecionada. As opções incluem inserir um novo elemento, realizar uma busca simples ou complexa, 
+exibir todos os elementos, remover um elemento por índice ou sair do programa. A função lê a opção selecionada pelo usuário e chama os métodos da classe correspondentes para realizar a ação solicitada.
