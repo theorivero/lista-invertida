@@ -68,50 +68,65 @@ class ListaInvertida:
         self.insersao({'nome': "Pedro", "idade": "21", "time": "Figueirense"})
 
     def busca_simples(self):
-        print('Colunas:')
-        for diretorio in self.diretorios:
-            print(diretorio)
-        diretorio_desejado = input('Fazer a busca em qual coluna?')
-        valor_desejado = input('Qual valor será buscado?')
-        retorno_busca = self.lista_invertida[diretorio_desejado].get(valor_desejado)
-        if not retorno_busca:
-            print('Não existe nenhuma ocorrencia desse valor')
+        if len(self.data) < 1:
+            print('Nenhum usuário na lista')
+            print('Faça uma carga de dados ou adicione um elemento para realizar uma busca')
         else:
-            n_objeto = 0
-            for linha in retorno_busca:
-                n_objeto += 1
+            print('Colunas:')
+            for diretorio in self.diretorios:
+                print(diretorio)
+            print('\n')
+            diretorio_desejado = input('Fazer a busca em qual coluna? ')
+            valor_desejado = input('Qual valor será buscado? ')
+            try:
+                retorno_busca = self.lista_invertida[diretorio_desejado].get(valor_desejado)
+                n_objeto = 0
+                for linha in retorno_busca:
+                    n_objeto += 1
+                    print('\n')
+                    print(f'Pessoa {n_objeto}')
+                    for key in self.data[linha].keys():
+                        print(f'{key}: {self.data[linha][key]}')
+            except KeyError:
                 print('\n')
-                print(f'Pessoa {n_objeto}')
-                for key in self.data[linha].keys():
-                    print(f'{key}: {self.data[linha][key]}')
+                print('Não existe nenhuma ocorrencia desse valor')
+                print('Confira se escreveu a coluna e o nome da pessoa corretamente')
 
     def busca_complexa(self):
-        print('Colunas:')
-        for diretorio in self.diretorios:
-            print(diretorio)
-        diretorio_desejado1 = input('Qual será a coluna 1 da busca?')
-        valor_desejado1 = input('Qual o valor do item 1?')
-        diretorio_desejado2 = input('Qual será a coluna 2 da busca?')
-        valor_desejado2 = input('Qual o valor do item 2?')
-        lista_de_diretorios_e_seus_valores_ordenada = \
-            self.ordena_duas_listas_pelo_primeiro_item_da_lista(
-                [diretorio_desejado1, valor_desejado1], [diretorio_desejado2, valor_desejado2]
-            )
-        diretorios_ordenados = \
-            lista_de_diretorios_e_seus_valores_ordenada[0][0] + "_" + lista_de_diretorios_e_seus_valores_ordenada[1][0]
-        valores_ordenados = \
-            lista_de_diretorios_e_seus_valores_ordenada[0][1] + "_" + lista_de_diretorios_e_seus_valores_ordenada[1][1]
-        retorno_busca = self.lista_invertida[diretorios_ordenados].get(valores_ordenados)
-        if not retorno_busca:
-            print('Não existe nenhuma ocorrencia desse valor')
+        if len(self.data) < 1:
+            print('Nenhum usuário na lista')
+            print('Faça uma carga de dados ou adicione um elemento para realizar uma busca')
         else:
-            n_objeto = 0
-            for linha in retorno_busca:
-                n_objeto += 1
+            print('Colunas:')
+            print('\n')
+            for diretorio in self.diretorios:
+                print(diretorio)
+            print('\n')
+            diretorio_desejado1 = input('Qual será a coluna 1 da busca? ')
+            valor_desejado1 = input('Qual o valor do item 1? ')
+            diretorio_desejado2 = input('Qual será a coluna 2 da busca? ')
+            valor_desejado2 = input('Qual o valor do item 2? ')
+            try:
+                lista_de_diretorios_e_seus_valores_ordenada = \
+                    self.ordena_duas_listas_pelo_primeiro_item_da_lista(
+                        [diretorio_desejado1, valor_desejado1], [diretorio_desejado2, valor_desejado2]
+                    )
+                diretorios_ordenados = \
+                    lista_de_diretorios_e_seus_valores_ordenada[0][0] + "_" + lista_de_diretorios_e_seus_valores_ordenada[1][0]
+                valores_ordenados = \
+                    lista_de_diretorios_e_seus_valores_ordenada[0][1] + "_" + lista_de_diretorios_e_seus_valores_ordenada[1][1]
+                retorno_busca = self.lista_invertida[diretorios_ordenados].get(valores_ordenados)
+                n_objeto = 0
+                for linha in retorno_busca:
+                    n_objeto += 1
+                    print('\n')
+                    print(f'Pessoa {n_objeto}')
+                    for key in self.data[linha].keys():
+                        print(f'{key}: {self.data[linha][key]}')
+            except KeyError:
                 print('\n')
-                print(f'Pessoa {n_objeto}')
-                for key in self.data[linha].keys():
-                    print(f'{key}: {self.data[linha][key]}')
+                print('Não existe nenhuma ocorrencia desse valor')
+                print('Confira se escreveu as coluna e os nomes das pessoas corretamente')
 
     def mostrar_todos_elementos(self):
         n_objeto = 0
@@ -121,6 +136,10 @@ class ListaInvertida:
             print(f'Pessoa {n_objeto}')
             for key in d:
                 print(f'{key}: {d[key]}')
+        if len(self.data) < 1:
+            print('Nenhum usuário na lista')
+            print('Faça uma carga de dados ou adicione um elemento')
+
 
     def remover_elemento_por_index(self):
         try:
