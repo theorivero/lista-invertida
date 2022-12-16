@@ -1,27 +1,40 @@
 class ListaInvertida:
     def __init__(self):
+        # Inicializa os atributos 'data', 'lista_invertida' e 'diretorios'
         self.data = []
         self.lista_invertida = {}
         self.diretorios = ['nome', 'idade', 'time']
 
     def insersao(self, valores):
+        # Adiciona o dicionário 'valores' na lista 'data' e chama o método 'monta_lista_invertida'
         self.data.append(valores)
         self.monta_lista_invertida()
 
     def monta_lista_invertida(self):
+        """
+        Percorre os valores de 'diretorios' e cria chaves no dicionário 'lista_invertida' para cada valor.
+        Depois, percorre novamente 'diretorios' para criar as chaves no dicionário 'lista_invertida' para combinações de valores distintos.
+        Por exemplo, se 'diretorios' for ['nome', 'idade', 'time'], serão criadas as chaves 'nome_idade', 'nome_time' e 'idade_time'.
+        Depois, percorre cada linha em 'data' e cria ou atualiza as chaves em 'lista_invertida' com o índice da linha em 'data'.
+        """
+        # Percorre os valores de 'diretorios' e cria chaves no dicionário 'lista_invertida' para cada valor
+
         for diretorio in self.diretorios:
             self.lista_invertida[diretorio] = {}
+            # Cria chaves no dicionário 'lista_invertida' para combinações de valores distintos em 'diretorios'
             for diretorio2 in self.diretorios:
                 if diretorio != diretorio2:
                     lista_de_diretorios = [diretorio, diretorio2]
                     lista_de_diretorios.sort()
                     self.lista_invertida["_".join(lista_de_diretorios)] = {}
+        # Percorre cada linha em 'data' e cria ou atualiza as chaves em 'lista_invertida' com o índice da linha em 'data'
         for index, linha in enumerate(self.data):
             for diretorio, valor in linha.items():
                 if valor in self.lista_invertida[diretorio]:
                     self.lista_invertida[diretorio][valor].append(index)
                 else:
                     self.lista_invertida[diretorio][valor] = [index]
+                # Cria chaves no dicionário 'lista_invertida' para combinações de valores de diferentes chaves em 'linha'
                 for diretorio2, valor2 in linha.items():
                     if diretorio != diretorio2:
                         lista_de_diretorios_e_seus_valores_ordenada = \
@@ -39,25 +52,45 @@ class ListaInvertida:
 
     @staticmethod
     def ordena_duas_listas_pelo_primeiro_item_da_lista(lista1, lista2):
+        """
+        Recebe duas listas e as ordena pelo primeiro item de cada uma.
+        :param lista1: uma lista
+        :param lista2: outra lista
+        :return: as duas listas ordenadas pela primeira posição de cada uma
+        """
         listas = [lista1, lista2]
         return sorted(listas, key=lambda x: x[0])
 
     def montar_dict_com_todos_os_valor_de_cada_diretorio(self):
+        """
+        Cria um dicionário com a lista de todos os valores de cada chave em 'diretorios'.
+        :return: dicionário com a lista de todos os valores de cada chave em 'diretorios'
+        """
         todos_os_valor_de_cada_diretorio = {diretorio: [] for diretorio in self.diretorios}
+        # Percorre cada linha em 'data' e adiciona o valor de cada chave em 'todos_os_valor_de_cada_diretorio'
         for linha in self.data:
             for chave, valor in linha.items():
                 todos_os_valor_de_cada_diretorio[chave].append(valor)
         return todos_os_valor_de_cada_diretorio
 
     def insersao_com_perguntas(self):
+        """
+        Solicita ao usuário o valor de cada chave em 'diretorios' e adiciona o dicionário com os valores a 'data'.
+        Depois, chama o método 'monta_lista_invertida' para atualizar o dicionário 'lista_invertida'.
+        """
         dict_a_ser_adicionado = {}
+        # Solicita o valor de cada chave em 'diretorios' ao usuário e armazena os valores em 'dict_a_ser_adicionado'
         for diretorio in self.diretorios:
             valor = input(f'digite o(a) {diretorio}: ')
             dict_a_ser_adicionado[diretorio] = valor
+        # Adiciona o dicionário 'dict_a_ser_adicionado' na lista 'data' e chama o método 'monta_lista_invertida'
         self.insersao(dict_a_ser_adicionado)
 
     @staticmethod
     def escolha_inexistente():
+        """
+        Exibe a mensagem 'opção inexistente' e chama o método 'menu'.
+        """
         print('Essa escolha não existe')
 
     def carga_de_dados(self):
@@ -140,7 +173,6 @@ class ListaInvertida:
             print('Nenhum usuário na lista')
             print('Faça uma carga de dados ou adicione um elemento')
 
-
     def remover_elemento_por_index(self):
         try:
             index = int(input('Index da Pessoa que deseja excluir: '))
@@ -151,8 +183,6 @@ class ListaInvertida:
             return self.monta_lista_invertida()
         except IndexError:
             print('Nenhuma pessoa está registrada com esse index')
-
-
 
     def menu(self):
         opcoes = {

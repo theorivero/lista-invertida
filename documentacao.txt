@@ -1,0 +1,13 @@
+Classe ListaInvertida:
+
+__init__(self): método construtor que inicializa os atributos data, lista_invertida e diretorios. O atributo data é uma lista vazia, lista_invertida é um dicionário vazio e diretorios é uma lista com os valores 'nome', 'idade' e 'time'.
+
+insersao(self, valores): método que adiciona o dicionário valores na lista data e chama o método monta_lista_invertida().
+
+monta_lista_invertida(self): método que percorre os valores de diretorios e cria chaves no dicionário lista_invertida para cada valor. Em seguida, percorre novamente diretorios para criar as chaves no dicionário lista_invertida para combinações de valores distintos. Por exemplo, se diretorios for ['nome', 'idade', 'time'], serão criadas as chaves 'nome_idade', 'nome_time' e 'idade_time'. Depois, o método percorre cada linha em data e cria ou atualiza as chaves em lista_invertida com o índice da linha em data.
+
+ordena_duas_listas_pelo_primeiro_item_da_lista(lista1, lista2): método estático que recebe duas listas e as ordena pelo primeiro item de cada uma.
+
+montar_dict_com_todos_os_valor_de_cada_diretorio(self): método que cria um dicionário com chaves para cada valor em diretorios e valores vazios. Em seguida, percorre cada linha em data e adiciona os valores de cada chave no dicionário criado.
+
+insersao_com_perguntas(self): método que solicita ao usuário que digite os valores para cada chave em diretorios e cria um dicionário com esses valores. Depois, chama o método insersao() passando o dicionário criado como argumento.
