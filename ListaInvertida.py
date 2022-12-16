@@ -77,8 +77,7 @@ class ListaInvertida:
         if not retorno_busca:
             print('Não existe nenhuma ocorrencia desse valor')
         else:
-            for linha in retorno_busca:
-                n_objeto = 0
+            n_objeto = 0
             for linha in retorno_busca:
                 n_objeto += 1
                 print('\n')
@@ -106,8 +105,7 @@ class ListaInvertida:
         if not retorno_busca:
             print('Não existe nenhuma ocorrencia desse valor')
         else:
-            for linha in retorno_busca:
-                n_objeto = 0
+            n_objeto = 0
             for linha in retorno_busca:
                 n_objeto += 1
                 print('\n')
