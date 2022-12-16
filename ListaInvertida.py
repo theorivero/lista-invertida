@@ -114,13 +114,26 @@ class ListaInvertida:
                     print(f'{key}: {self.data[linha][key]}')
 
     def mostrar_todos_elementos(self):
-        # TODO: implementar um mostrar tudo bonito
-        return self.data
+        n_objeto = 0
+        for d in self.data:
+            n_objeto += 1
+            print('\n')
+            print(f'Pessoa {n_objeto}')
+            for key in d:
+                print(f'{key}: {d[key]}')
 
     def remover_elemento_por_index(self):
-        # TODO: implementar método q remove um elemento da lista pelo index, lembrar q
-        #  tem q rodar o self.monta_lista_invertida() depois da remoção
-        return True
+        try:
+            index = int(input('Index da Pessoa que deseja excluir: '))
+            pessoa = self.data[index]
+            nome_pessoa = pessoa.get('nome')
+            self.data.pop(index)
+            print(f'Você excluiu o/a {nome_pessoa}')
+            return self.monta_lista_invertida()
+        except IndexError:
+            print('Nenhuma pessoa está registrada com esse index')
+
+
 
     def menu(self):
         opcoes = {
@@ -138,7 +151,7 @@ class ListaInvertida:
             "3 - busca simples\n"
             "4 - busca complexa\n"
             "5 - mostrar todos os elementos\n"
-            "6 - mostrar todos os elementos\n"
+            "6 - excluir pessoa pelo index\n"
             "escolha:"
         )
         metodo_escolhido = opcoes.get(escolha, self.escolha_inexistente)
